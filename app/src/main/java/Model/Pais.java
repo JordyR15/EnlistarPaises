@@ -56,7 +56,7 @@ public class Pais {
     public Pais(JSONObject a) throws JSONException {
         nombrePais =  a.getString("Name").toString();
         JSONObject countryCode = a.getJSONObject("CountryCodes");
-        codImagen =  a.getString("iso2").toString();
+        codImagen =  countryCode.getString("iso2").toString();
         urlImagen =  "http://www.geognos.com/api/en/countries/flag/"+codImagen+".png";
         if (!a.isNull("Capital")) {
             JSONObject countryCapital = a.getJSONObject("Capital");
