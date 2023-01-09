@@ -18,10 +18,10 @@ import Model.Pais;
 
 public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.PaisViewHolder> {
     private Context Ctx;
-    private List<Pais> lista_pais;
+    private List<Pais> lstPaises;
 
-    public PaisAdapter(Context mCtx, List<Pais> pais) {
-        this.lista_pais = pais;
+    public PaisAdapter(Context mCtx, List<Pais> paises) {
+        this.lstPaises = paises;
         Ctx = mCtx;
     }
 
@@ -35,41 +35,29 @@ public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.PaisViewHolder
 
     @Override
     public void onBindViewHolder(PaisAdapter.PaisViewHolder holder, int position) {
-        Pais pais = lista_pais.get(position);
-        holder.textViewNrevista.setText(pais.getNombrePais());
-
+        Pais paises = lstPaises.get(position);
+        holder.txtTituloPais.setText(paises.getNombrePais());
+        holder.txtCapital.setText(paises.getCapital());
+        holder.txtPrefijo.setText(paises.getPrefijoPais());
         Glide.with(Ctx)
-                .load(pais.getUrlImagen())
-                .into(holder.imageportada);
-
-        /*holder.imageportada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Pais item = lista_revistas.get(holder.getAdapterPosition());
-                Intent intent = new Intent(Ctx, actvidadVolumenes.class);
-                Bundle b = new Bundle();
-                b.putString("id",item.getJournal_id());
-                intent.putExtras(b);
-                Ctx.startActivity(intent);
-                //Toast.makeText(Ctx, "You clicked " + item.getTitulo(), Toast.LENGTH_LONG).show();
-            }
-        });*/
+                .load(paises.getUrlImagen())
+                .into(holder.imgUrlBandera);
     }
 
     @Override
     public int getItemCount() {
-        return lista_pais.size();
+        return lstPaises.size();
     }
 
     class PaisViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewNrevista;
-        ImageView imageportada;
+        TextView txtTituloPais, txtCapital, txtPrefijo;
+        ImageView imgUrlBandera;
         public PaisViewHolder(View itemView) {
             super(itemView);
-            /*textViewNrevista = itemView.findViewById(R.id.txtnombrerevista);
-            imageportada = itemView.findViewById(R.id.imgportada);*/
+            txtTituloPais = itemView.findViewById(R.id.txtTituloCountry);
+            txtCapital = itemView.findViewById(R.id.txtCapital);
+            txtPrefijo = itemView.findViewById(R.id.txtPrefijo);
+            imgUrlBandera = itemView.findViewById(R.id.imgBandera);
         }
-
     }
-
 }
